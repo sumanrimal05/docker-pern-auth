@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  frontend:
+    image: mern-frontend
+    container_name: mern-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+
+  backend:
+    image: mern-backend
+    container_name: mern-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 5000:5000
